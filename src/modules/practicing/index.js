@@ -3,10 +3,11 @@ import QuestionContainer from '../../components/question-container';
 import Option from '../../components/option';
 import Word from '../../components/word';
 
+
 function Practicing() {
     return (
         <div className="flex justify-center max-w">
-            <div className="container bg-gray-100">
+            <div className="container">
                 <HeaderBack title={"Part 1"}></HeaderBack>
                 <div className="p-2">
                     <QuestionContainer>
