@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './modules/home';
 import Practicing from './modules/practicing';
 
+
 function App() {
   return (
     <BrowserRouter>
