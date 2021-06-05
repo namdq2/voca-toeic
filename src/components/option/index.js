@@ -1,7 +1,9 @@
 function Option(props) {
-    const { content } = props;
+    const { answer, disabled, onClick } = props;
+    const hoverCSS = disabled ? " " : "hover:border-green-500 hover:bg-green-500 hover:text-white"
     return (
-        <div className="mt-3 rounded-3xl border-gray-300 border p-2 flex justify-center items-center hover:border-green-500 hover:bg-green-500 hover:text-white font-bold">{content}</div>
+        <button className={"w-full mt-3 rounded-3xl border-gray-300 border-2 p-2 flex justify-center items-center font-bold " + hoverCSS}
+            onClick={() => onClick(answer.id)} key={answer.id} disabled={disabled}>{answer.content}</button>
     );
 }
 

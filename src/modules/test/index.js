@@ -24,7 +24,6 @@ function Test() {
 
         if (currentQuestionIndex < test.questions.length - 1) {
             currentQuestionIndex = currentQuestionIndex + 1;
-            console.log(currentQuestionIndex);
             setQuestion(test.questions[currentQuestionIndex]);
         } else {
             setIsFinishTest(true);
@@ -43,8 +42,7 @@ function Test() {
     }
 
     const answerView = (answers) => answers.map((answer) =>
-        // <Option content={answer.content} key={answer.id}></Option>
-        <button onClick={() => answerClick(answer.id)} key={answer.id} disabled={result !== undefined}>{answer.content}</button>
+        <Option answer={answer} key={answer.id} disabled={result !== undefined} onClick={answerClick}></Option>
     )
 
     return (
@@ -56,7 +54,7 @@ function Test() {
                     <QuestionContainer key={question.id}>
                         <div className="font-bold italic">{question.question}</div>
                         <Word content={question.word}></Word>
-                        <div>
+                        <div className="flex-row">
                             {answerView(question.answers)}
                         </div>
                         {
