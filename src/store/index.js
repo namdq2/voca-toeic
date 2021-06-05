@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import vocabularyReducer from './vocabulary/vocabularySlice';
+import testReducer from './test/testSlice';
 
 export default configureStore({
     reducer: {
-        vocabulary: vocabularyReducer,
+        test: testReducer,
     },
 });

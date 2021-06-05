@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './modules/home';
-import Practicing from './modules/practicing';
+import Part from './modules/part';
+import Test from './modules/test';
 
 
 function App() {
@@ -11,8 +12,11 @@ function App() {
           <Route exact path="/">
             <Home />
           </Route>
-          <Route path="/practicing/:id">
-            <Practicing />
+          <Route path="/parts/:id">
+            <Part />
+          </Route>
+          <Route path="/tests/:partId?/:testId?">
+            <Test />
           </Route>
         </Switch>
       </div>

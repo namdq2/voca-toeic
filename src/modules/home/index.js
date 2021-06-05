@@ -5,10 +5,10 @@ import QuestionContainer from '../../components/question-container';
 import { useSelector } from 'react-redux';
 
 function Home() {
-  const parts = useSelector((state) => state.vocabulary.data);
+  const parts = useSelector((state) => state.test.data);
 
   const partList = parts.map((part) =>
-    <Link to={"/practicing/" + part.id} key={part.id}>
+    <Link to={"/parts/" + part.id} key={part.id}>
       <PartItem color="bg-blue-300" name={part.name} description={part.description} progress={part.progress} />
     </Link>
   );
