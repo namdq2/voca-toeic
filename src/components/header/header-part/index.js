@@ -1,13 +1,19 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 function HeaderPart(props) {
   const { title } = props;
+  const history = useHistory();
+
+  const back = () => {
+    history.goBack();
+  }
+
   return (
     <div className="flex p-5 h-16 items-center">
       <div className="flex-1">
-        <Link to="/"><FontAwesomeIcon icon={faArrowLeft} /></Link>
+        <button onClick={() => back()}><FontAwesomeIcon icon={faArrowLeft} /></button>
       </div>
       <div className="flex-1 font-bold flex justify-center">
         {title}
