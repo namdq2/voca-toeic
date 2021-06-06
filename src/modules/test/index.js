@@ -88,10 +88,10 @@ function Test() {
                                 (result !== undefined) ?
                                     result ?
                                         <div className="w-full p-6 rounded-xl border-2 p-2 flex justify-center items-center 
-                                    font-bold  text-green-800">Correct!</div>
+                                    font-bold  text-green-600">Correct!</div>
                                         :
                                         <div className="w-full p-6 rounded-xl border-2 p-2 flex justify-center items-center 
-                                    font-bold  text-red-800">Sad :(</div>
+                                    font-bold  text-red-600">Sad :(</div>
                                     : null
                             }
                         </div>
