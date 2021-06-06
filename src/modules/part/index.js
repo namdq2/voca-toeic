@@ -1,4 +1,4 @@
-import HeaderBack from '../../components/header/header-back';
+import HeaderPart from '../../components/header/header-part';
 import QuestionContainer from '../../components/question-container';
 import { useParams } from 'react-router';
 import { useSelector } from 'react-redux';
@@ -19,7 +19,7 @@ function Part() {
     return (
         <div className="flex justify-center max-w">
             <div className="container">
-                <HeaderBack title={part.name}></HeaderBack>
+                <HeaderPart title={part.name}></HeaderPart>
                 <div className="p-2">
                     <QuestionContainer>
                         Tests
