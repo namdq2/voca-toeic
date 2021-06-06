@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const testSlice = createSlice({
+const testSlice = createSlice({
     name: 'test',
     initialState: {
         data: [
@@ -473,5 +473,19 @@ export const testSlice = createSlice({
     },
 })
 
+export const selectTestById = (state, partId, testId) => {
+    let existingPart = state.test.data.find((part) => part.id == partId);
+    if (!existingPart) {
+        return;
+    }
+    let existingTest = existingPart.tests.find((test) => test.id == testId);
+    if (!existingTest) {
+        return;
+    }
+
+    return existingTest;
+}
+
 export const { retrieve, updateProgress } = testSlice.actions;
+
 export default testSlice.reducer;

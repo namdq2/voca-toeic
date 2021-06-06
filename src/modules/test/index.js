@@ -1,32 +1,31 @@
+import React, { useEffect, useState } from 'react';
+import { useHistory, useParams } from 'react-router';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectTestById, updateProgress } from '../../store/test/testSlice';
 import HeaderTest from '../../components/header/header-test';
 import QuestionContainer from '../../components/question-container';
 import Option from '../../components/option';
 import Word from '../../components/word';
 import Button from '../../components/button';
-import { useHistory, useParams } from 'react-router';
-import { useSelector } from 'react-redux';
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { updateProgress } from '../../store/test/testSlice';
-
-
-let currentQuestionIndex = 0;
 
 function Test() {
     const history = useHistory();
     const dispatch = useDispatch();
 
     const { partId, testId } = useParams();
-    const parts = useSelector((state) => state.test.data);
-    const part = parts.find(part => part.id == partId);
-    const test = part.tests.find(test => test.id == testId);
+    const test = useSelector((state) => selectTestById(state, partId, testId));
 
-
-    const [question, setQuestion] = useState(test.questions[0]);
+    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+    const [question, setQuestion] = useState(test.questions[currentQuestionIndex]);
     const [result, setResult] = useState(undefined);
     const [isFinishTest, setIsFinishTest] = useState(false);
     const [pass, setPass] = useState(0);
     const [currentQuestion, setCurrentQuestion] = useState(0);
+    const [answerId, setAnswerId] = useState(undefined);
+
+    useEffect(() => {
+        setQuestion(test.questions[currentQuestionIndex]);
+    }, [currentQuestionIndex])
 
     const back = () => {
         let progress = pass / test.questions.length * 100
@@ -36,15 +35,15 @@ function Test() {
 
     const nextQuestionClick = () => {
         setResult(undefined);
+        setAnswerId(undefined);
         if (currentQuestionIndex < test.questions.length - 1) {
-            currentQuestionIndex = currentQuestionIndex + 1;
-            setQuestion(test.questions[currentQuestionIndex]);
+            setCurrentQuestionIndex(currentQuestionIndex + 1);
         }
     }
 
     const answerClick = (id) => {
+        setAnswerId(id);
         let result = id === question.correctAnswerId;
-        console.log(result)
         if (result) {
             setResult(true);
             setPass(pass + 1);
@@ -57,9 +56,21 @@ function Test() {
         setCurrentQuestion(currentQuestion + 1);
     }
 
-    const answerView = (answers) => answers.map((answer) =>
-        <Option answer={answer} key={answer.id} disabled={result !== undefined} onClick={answerClick}></Option>
-    )
+    const answerView = (answers) => answers.map((answer) => {
+        let answerResult = undefined;
+        if (answerId !== undefined) {
+            if (answer.id === answerId) {
+                answerResult = false;
+            }
+            if (answer.id === question.correctAnswerId) {
+                answerResult = true;
+            }
+        }
+
+        return (
+            <Option answer={answer} key={answer.id} disabled={result !== undefined} onClick={answerClick} colorCorrect="green" colorIncorrect="red" result={answerResult}></Option>
+        )
+    })
 
     return (
         <div className="flex justify-center max-w">
@@ -77,10 +88,10 @@ function Test() {
                                 (result !== undefined) ?
                                     result ?
                                         <div className="w-full p-6 rounded-xl border-2 p-2 flex justify-center items-center 
-                                    font-bold bg-green-300 border-green-300 text-green-800">Đúng rồi!</div>
+                                    font-bold  text-green-800">Correct!</div>
                                         :
                                         <div className="w-full p-6 rounded-xl border-2 p-2 flex justify-center items-center 
-                                    font-bold bg-red-300 border-red-300 text-red-800">Sai rồi :(</div>
+                                    font-bold  text-red-800">Sad :(</div>
                                     : null
                             }
                         </div>
@@ -89,16 +100,16 @@ function Test() {
                                 isFinishTest ?
                                     <Button onClick={() => back()}
                                         content="Finish"
-                                        textColor="text-red-800"
-                                        bgColor="bg-red-500"
-                                        borderColor="border-red-500">
+                                        textColor="text-blue-800"
+                                        bgColor="bg-blue-500"
+                                        borderColor="border-blue-500">
                                     </Button>
                                     :
                                     <Button onClick={nextQuestionClick}
                                         content="Next"
-                                        textColor="text-green-800"
-                                        bgColor="bg-green-400"
-                                        borderColor="border-green-400"
+                                        textColor="text-blue-800"
+                                        bgColor="bg-blue-400"
+                                        borderColor="border-blue-400"
                                         disabled={result === undefined}>
                                     </Button>
                             }
