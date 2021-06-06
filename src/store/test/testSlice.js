@@ -458,8 +458,20 @@ export const testSlice = createSlice({
         retrieve: (state) => {
             console.log(state);
         },
+        updateProgress: (state, action) => {
+            const { partId, testId, progress } = action.payload;
+            const existingPart = state.data.find((part) => part.id == partId);
+            if (!existingPart) {
+                return;
+            }
+            const existingTest = existingPart.tests.find((test) => test.id == testId);
+            if (!existingTest) {
+                return;
+            }
+            existingTest.progress = progress;
+        }
     },
 })
 
-export const { retrieve } = testSlice.actions;
+export const { retrieve, updateProgress } = testSlice.actions;
 export default testSlice.reducer;

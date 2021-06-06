@@ -11,7 +11,7 @@ function HeaderTest(props) {
     <div>
       <div className="flex p-5 h-16 items-center">
         <div className="flex-1">
-          <Link to="/"><FontAwesomeIcon icon={faArrowLeft} /></Link>
+          {/* <Link to="/"><FontAwesomeIcon icon={faArrowLeft} /></Link> */}
         </div>
         <div className="flex-1 font-bold flex justify-center">
           {title}

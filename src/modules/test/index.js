@@ -2,24 +2,37 @@ import HeaderTest from '../../components/header/header-test';
 import QuestionContainer from '../../components/question-container';
 import Option from '../../components/option';
 import Word from '../../components/word';
-import { useParams } from 'react-router';
+import Button from '../../components/button';
+import { useHistory, useParams } from 'react-router';
 import { useSelector } from 'react-redux';
 import React, { useState } from 'react';
-import Button from '../../components/button';
+import { useDispatch } from 'react-redux';
+import { updateProgress } from '../../store/test/testSlice';
+
 
 let currentQuestionIndex = 0;
 
 function Test() {
+    const history = useHistory();
+    const dispatch = useDispatch();
+
     const { partId, testId } = useParams();
     const parts = useSelector((state) => state.test.data);
     const part = parts.find(part => part.id == partId);
     const test = part.tests.find(test => test.id == testId);
+
 
     const [question, setQuestion] = useState(test.questions[0]);
     const [result, setResult] = useState(undefined);
     const [isFinishTest, setIsFinishTest] = useState(false);
     const [pass, setPass] = useState(0);
     const [currentQuestion, setCurrentQuestion] = useState(0);
+
+    const back = () => {
+        let progress = pass / test.questions.length * 100
+        dispatch(updateProgress({ partId, testId, progress }));
+        history.goBack();
+    }
 
     const nextQuestionClick = () => {
         setResult(undefined);
@@ -74,12 +87,11 @@ function Test() {
                         <div className="mt-4">
                             {
                                 isFinishTest ?
-                                    <Button onClick={() => { }}
+                                    <Button onClick={() => back()}
                                         content="Finish"
                                         textColor="text-red-800"
                                         bgColor="bg-red-500"
-                                        borderColor="border-red-500"
-                                        disabled={!result}>
+                                        borderColor="border-red-500">
                                     </Button>
                                     :
                                     <Button onClick={nextQuestionClick}
@@ -97,7 +109,5 @@ function Test() {
         </div >
     );
 }
-
-
 
 export default Test;
