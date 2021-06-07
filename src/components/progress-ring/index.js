@@ -4,28 +4,28 @@ class ProgressRing extends React.Component {
     constructor(props) {
         super(props);
 
-        const { radius, stroke } = this.props;
+        const {radius, stroke} = this.props;
 
         this.normalizedRadius = radius - stroke * 2;
         this.circumference = this.normalizedRadius * 2 * Math.PI;
     }
 
     render() {
-        const { radius, stroke, progress } = this.props;
+        const {radius, stroke, progress} = this.props;
 
         const strokeDashoffset = this.circumference - progress / 100 * this.circumference;
         const strokeDashoffsets = this.circumference - 0 / 100 * this.circumference;
         return (
             <svg className="transform -rotate-90"
-                height={radius * 2}
-                width={radius * 2}
+                 height={radius * 2}
+                 width={radius * 2}
             >
                 <circle
                     stroke="rgba(191, 219, 254, var(--tw-bg-opacity))"
                     fill="transparent"
                     strokeWidth={stroke}
                     strokeDasharray={this.circumference + ' ' + this.circumference}
-                    style={{ strokeDashoffsets }}
+                    style={{strokeDashoffsets}}
                     r={this.normalizedRadius}
                     cx={radius}
                     cy={radius}
@@ -35,7 +35,7 @@ class ProgressRing extends React.Component {
                     fill="transparent"
                     strokeWidth={stroke}
                     strokeDasharray={this.circumference + ' ' + this.circumference}
-                    style={{ strokeDashoffset }}
+                    style={{strokeDashoffset}}
                     r={this.normalizedRadius}
                     cx={radius}
                     cy={radius}
