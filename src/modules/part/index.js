@@ -19,7 +19,7 @@ function Part() {
     return (
         <div className="flex justify-center max-w">
             <div className="container">
-                <HeaderPart title={part.name}></HeaderPart>
+                <HeaderPart title={part.name}/>
                 <div className="p-2">
                     <QuestionContainer>
                         Tests

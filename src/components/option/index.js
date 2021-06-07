@@ -11,9 +11,6 @@ function Option(props) {
         result === undefined ? "" : result ? colorTrue : colorFalse
         : "hover:border-green-500 hover:bg-green-500 hover:text-white";
 
-
-    const emptyElement = () => <div className="p-4"></div>;
-
     return (
         <button
             className={"w-full mt-3 rounded-3xl border-gray-300 border-2 p-2 flex justify-between items-center font-bold " + hoverCSS}
@@ -24,7 +21,7 @@ function Option(props) {
             </div>
 
             {answer.content}
-            <div className="pl-2 pr-2"></div>
+            <div className="pl-2 pr-2"/>
         </button>
     );
 }

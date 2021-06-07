@@ -69,7 +69,7 @@ function Test() {
 
         return (
             <Option answer={answer} key={answer.id} disabled={result !== undefined} onClick={answerClick}
-                    result={answerResult}></Option>
+                    result={answerResult}/>
         )
     })
 
@@ -77,11 +77,11 @@ function Test() {
         <div className="flex justify-center max-w">
             <div className="container">
                 <HeaderTest title={test.name} current={currentQuestion} pass={pass}
-                            total={test.questions.length}></HeaderTest>
+                            total={test.questions.length}/>
                 <div className="p-2">
                     <QuestionContainer key={question.id}>
                         <div className="font-bold italic">{question.question}</div>
-                        <Word content={question.word}></Word>
+                        <Word content={question.word}/>
                         <div className="flex-row">
                             {answerView(question.answers)}
                         </div>
