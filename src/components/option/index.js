@@ -15,13 +15,16 @@ function Option(props) {
         <button
             className={"w-full mt-3 rounded-3xl border-gray-300 border-2 p-2 flex justify-between items-center font-bold " + hoverCSS}
             onClick={() => onClick(answer.id)} key={answer.id} disabled={disabled}>
-            <div className="pl-2 pr-2 text-white">
-                {result === undefined ? null : result ? <FontAwesomeIcon icon={faCheckCircle}/> :
-                    <FontAwesomeIcon icon={faTimesCircle}/>}
+            <div className="text-white flex-1 flex">
+                {
+                    result === undefined ? null : result ?
+                        <FontAwesomeIcon icon={faCheckCircle} className={"ml-2"}/>
+                        :
+                        <FontAwesomeIcon icon={faTimesCircle} className={"ml-2"}/>
+                }
             </div>
-
-            {answer.content}
-            <div className="pl-2 pr-2"/>
+            <div className="flex-1">{answer.content}</div>
+            <div className="flex-1"/>
         </button>
     );
 }
