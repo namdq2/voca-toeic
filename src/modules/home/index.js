@@ -15,7 +15,7 @@ function Home() {
 
     return (
         <div className="flex justify-center max-w">
-            <div className="container ">
+            <div className="container p-2">
                 <QuestionContainer>
                     <Header title="Vocabulary"/>
                     {partList}
